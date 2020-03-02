@@ -1,4 +1,4 @@
-FZF_SNIPPET_CONFIG_DIR="$HOME/.config/fzf-snippets"
+FZF_SNIPPET_CONFIG_DIR=${FZF_SNIPPET_CONFIG_DIR:-"$HOME/.config/fzf-snippets"}
 
 function fzf-snippet-selection() {
   local out snippet key file
