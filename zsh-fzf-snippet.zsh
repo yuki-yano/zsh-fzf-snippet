@@ -3,6 +3,12 @@ FZF_SNIPPET_EDITOR=${EDITOR:-vim}
 
 function fzf-snippet-selection() {
   local out snippet key file
+
+  if [[ ! -f $FZF_SNIPPET_CONFIG_DIR/snippets ]]; then
+    echo 'snippets file does not exist' >&2
+    exit 1
+  fi
+
   IFS=$'\n' out=($(\grep -v "^#" $FZF_SNIPPET_CONFIG_DIR/snippets | \grep -v "^\s*$" | fzf --query "$LBUFFER" --prompt="Snippet> " --preview="cat $FZF_SNIPPET_CONFIG_DIR/{1}" --expect=ctrl-e))
   key=$(echo "$out" | head -1)
   snippet=$(echo "$out" | head -2 | tail -1)
