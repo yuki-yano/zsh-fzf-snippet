@@ -12,7 +12,7 @@ function fzf-snippet-selection() {
   fi
 
   grep_command='\grep -v "^#" $FZF_SNIPPET_CONFIG_DIR/snippets | \grep -v "^\s*$"'
-  fzf_command='fzf --query "$LBUFFER" --prompt="Snippet> " --preview="cat $FZF_SNIPPET_CONFIG_DIR/{1}" --expect=ctrl-e $FZF_SNIPPET_EXTRA_ARG'
+  fzf_command='fzf --query "$LBUFFER" delimiter=: --prompt="Snippet> " --preview="cat $FZF_SNIPPET_CONFIG_DIR/{1}" --expect=ctrl-e $FZF_SNIPPET_EXTRA_ARG'
   command="$grep_command | $fzf_command"
 
   IFS=$'\n' out=$(eval $command)
@@ -21,7 +21,7 @@ function fzf-snippet-selection() {
 
   if [[ $snippet != "" ]]; then
     if [[ $key == "ctrl-e" ]]; then
-      file=$(echo $snippet | cut -d' ' -f 1)
+      file=$(echo $snippet | cut -d':' -f 1)
       eval "$FZF_SNIPPET_EDITOR $FZF_SNIPPET_CONFIG_DIR/$file"
     else
       snippet=$(echo $snippet | awk '{for(i=2;i<NF;i++){printf("%s%s",$i,OFS=" ")}print $NF}')
