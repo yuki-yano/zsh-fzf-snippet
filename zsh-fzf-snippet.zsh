@@ -1,6 +1,7 @@
 FZF_SNIPPET_CONFIG_DIR=${FZF_SNIPPET_CONFIG_DIR:-"$HOME/.config/fzf-snippets"}
 FZF_SNIPPET_EDITOR=${EDITOR:-vim}
 FZF_SNIPPET_EXTRA_ARG=${FZF_SNIPPET_EXTRA_ARG:-''}
+FZF_SNIPPET_BINDKEY=${FZF_FINDER_BINDKEY:-'^x^s'}
 
 function fzf-snippet-selection() {
   local out snippet key file candidate fzf_command command
@@ -31,3 +32,4 @@ function fzf-snippet-selection() {
   zle reset-prompt
 }
 zle -N fzf-snippet-selection
+bindkey $FZF_SNIPPET_BINDKEY
