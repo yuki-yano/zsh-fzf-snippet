@@ -32,4 +32,4 @@ function fzf-snippet-selection() {
   zle reset-prompt
 }
 zle -N fzf-snippet-selection
-bindkey $FZF_SNIPPET_BINDKEY
+bindkey $FZF_SNIPPET_BINDKEY fzf-snippet-selection
